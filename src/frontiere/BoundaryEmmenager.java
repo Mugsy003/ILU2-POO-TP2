@@ -1,5 +1,7 @@
 package frontiere;
 
+import java.util.Iterator;
+
 import controleur.ControlEmmenager;
 
 public class BoundaryEmmenager {
@@ -27,9 +29,11 @@ public class BoundaryEmmenager {
 					break;
 
 				case 2:
-					//TODO a completer
-					break;
-
+					System.out.println("Bienvenue villageois "+ nomVisiteur);
+					StringBuilder questionF = new StringBuilder();
+					questionF.append("Quelle est votre force");
+					int force = Clavier.entrerEntier(questionF.toString());
+					controlEmmenager.ajouterGaulois(nomVisiteur, force);
 				default:
 					System.out.println("Vous devez choisir le chiffre 1 ou 2 !");
 					break;
@@ -39,6 +43,19 @@ public class BoundaryEmmenager {
 	}
 
 	private void emmenagerDruide(String nomVisiteur) {
-		//TODO a completer
+		System.out.println("Bienvenue druide"+nomVisiteur);
+		StringBuilder questionF = new StringBuilder();
+		questionF.append("Quelle est votre force");
+		int forceDruide = Clavier.entrerEntier(questionF.toString());
+		int effetPotionMax;
+		int effetPotionMin;
+		do {
+			effetPotionMin=Clavier.entrerEntier("Quelle est la force de potion la plus faible que vous produisez ?");
+			effetPotionMax=Clavier.entrerEntier("Quelle est la force de potion la plus forte que vous produisez ?");
+			if (effetPotionMax < effetPotionMin) {
+	            System.out.println("Attention ! Vous vous êtes trompé entre le min et le max. Réessayez.");
+	        }
+		} while (effetPotionMax<effetPotionMin);
+		controlEmmenager.ajouterDuide(nomVisiteur, forceDruide, effetPotionMin, effetPotionMax);
 	}
 }
